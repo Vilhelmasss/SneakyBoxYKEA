@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDataPersistence
@@ -11,7 +10,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         FreeSelect,
     }
 
-    [Serializable]
+    [System.Serializable]
     public class KeyPlacedObjectPair
     {
         public string key;
@@ -22,7 +21,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     private Dictionary<GameObject, PlacedObject> placedObjectsKeyValuePair = new Dictionary<GameObject, PlacedObject>();
     private List<PlacedObject> placedObjects = new List<PlacedObject>();
     private float gridSize = 1f;
-    private float snapThreshold = 0.5f;
     public GameObject CanvasUI;
     public GameObject selectedGameObject;
     public string currentKey;
@@ -70,6 +68,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public void SwitchToPlaceObjectState()
     {
+        if(previewObject is not null)
+            Destroy(previewObject);
         currentState = PlayerState.PlaceObject;
         previewObject = Instantiate(stringToPlacedObject[GetKey()]);
         previewObject.GetComponent<Collider>().enabled = false;
@@ -127,10 +127,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                     previewObject.transform.position = position;
                 }
             }
-            else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("PlacedObject"))
-            {
-                
-            }
         }
     }
 
@@ -178,10 +174,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))
-            {
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("PlacedObject"))
                     ObjectSelected(hit.collider.gameObject);
-            }
         }
     }
 

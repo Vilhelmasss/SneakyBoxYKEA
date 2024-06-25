@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
-using System.Runtime.CompilerServices;
+
 public class MainMenu : MonoBehaviour
 {
     private const string DATA_FILE_NAME = "data.json";
