@@ -2,7 +2,7 @@
 
 # How to Run the Project
 * Download the project.
-* Navigate to the project folder SneakyBoxYKEA-main/YKEA and launch it
+* Navigate to the project folder "../SneakyBoxYKEA-main/YKEA" and launch it
 * Turn on "MainMenu.scene", start the project and click "New Game" button.
 
 # Controls
